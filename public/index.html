@@ -1,13 +1,16 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <title>Anime Api</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
     />
     <style>
       * {
@@ -20,85 +23,141 @@
       html {
         height: 100%;
         width: 100%;
-        max-height: 100vh;
-        max-width: 100vw;
         background-color: #1e1e1e;
         color: #ce9178;
+        font-family: "Roboto", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1.5rem;
       }
 
       .container {
-        height: 100%;
+        max-width: 900px;
         width: 100%;
         display: grid;
-        grid-template-rows: auto 1fr;
+        grid-template-rows: auto 1fr auto;
         grid-template-columns: 1fr;
-        justify-content: space-between;
-        align-items: center;
+        gap: 2.5rem;
         position: relative;
+        text-align: center;
+      }
+
+      h1 {
+        font-family: "Poppins", sans-serif;
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 600;
+        color: #f0c19e;
+        text-shadow: 0 0 10px #7cdcfeaa;
+        letter-spacing: 0.05em;
+        user-select: none;
+      }
+
+      .profile {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+        z-index: 2;
+      }
+
+      #pic {
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center;
+        box-shadow: 0 0 20px #7cdcfecc;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+        cursor: pointer;
+      }
+      #pic:hover,
+      #pic:focus {
+        transform: scale(1.1);
+        box-shadow: 0 0 35px #7cdcfeff;
+        outline: none;
+      }
+
+      .github {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .fa-github {
+        color: #7cdcfe;
+        font-size: 2.8rem;
+        transition: color 0.35s ease;
+        cursor: pointer;
+      }
+      .fa-github:hover,
+      .fa-github:focus {
+        color: #4db8ff;
+        outline: none;
+      }
+
+      a {
+        font-family: "Poppins", sans-serif;
+        font-size: 1.3rem;
+        color: #7cdcfe;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.35s ease, text-shadow 0.35s ease;
+        cursor: pointer;
+      }
+      a:hover,
+      a:focus {
+        color: #4db8ff;
+        text-shadow: 0 0 8px #4db8ffaa;
+        outline: none;
       }
 
       .image-container {
         width: 100%;
         display: flex;
-        justify-content: space-between;
-        background-size: cover;
-        position: relative;
+        justify-content: center;
+        gap: 3.5rem;
         z-index: 1;
-      }
-
-      h1 {
-        font-size: 2rem;
-        text-align: center;
-        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-          sans-serif;
-        z-index: 2;
       }
 
       #gif,
       #mirrored-gif {
         height: 300px;
         width: 300px;
+        border-radius: 1.25rem;
+        box-shadow: 0 0 25px #7cdcfecc;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+        cursor: pointer;
+      }
+
+      #gif:hover,
+      #gif:focus,
+      #mirrored-gif:hover,
+      #mirrored-gif:focus {
+        transform: scale(1.1);
+        box-shadow: 0 0 40px #7cdcfeff;
+        outline: none;
       }
 
       #mirrored-gif {
         transform: scaleX(-1);
       }
 
-      #pic {
-        width: 250px;
-        height: 250px;
-        border-radius: 50%;
-        object-position: center;
-        object-fit: cover;
-      }
-
-      .profile {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 2;
-      }
-      .github {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        align-items: center;
-      }
-      .fa-github {
-        color: grey;
-      }
-      a {
-        font-size: 1.3rem;
-        color: #7cdcfe;
-      }
       @media (max-width: 700px) {
         .image-container {
           display: none;
+        }
+        #pic {
+          width: 150px;
+          height: 150px;
+        }
+        a {
+          font-size: 1.15rem;
+        }
+        h1 {
+          font-size: 2rem;
         }
       }
     </style>
@@ -107,9 +166,14 @@
     <div class="container">
       <h1>Welcome to API 🎉</h1>
       <div class="profile">
-        <img id="pic" src="image.webp" alt="" />
+        <img
+          id="pic"
+          src="image.webp"
+          alt="Profile picture of a smiling anime character with short dark hair and bright eyes, wearing a casual outfit"
+          tabindex="0"
+        />
         <div class="github">
-          <i class="fa fa-github" style="font-size: 36px"></i>
+          <i class="fa fa-github" aria-hidden="true" tabindex="0"></i>
           <a href="https://github.com/itzzzme/anime-api" target="_blank"
             >Click here to refer docs</a
           >
@@ -119,12 +183,14 @@
         <img
           id="gif"
           src="https://media.tenor.com/1G8D0kk1bMQAAAAi/anime-hello.gif"
-          alt=""
+          alt="Animated gif of a cheerful anime girl waving hello with a bright background"
+          tabindex="0"
         />
         <img
           id="mirrored-gif"
           src="https://media.tenor.com/1G8D0kk1bMQAAAAi/anime-hello.gif"
-          alt=""
+          alt="Animated gif of a cheerful anime girl waving hello with a bright background, mirrored horizontally"
+          tabindex="0"
         />
       </div>
     </div>
